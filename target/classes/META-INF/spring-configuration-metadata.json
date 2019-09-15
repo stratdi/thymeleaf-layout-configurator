@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "thymeleaf",
+      "type": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties",
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "thymeleaf.encoding",
+      "type": "java.lang.String",
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+    },
+    {
+      "name": "thymeleaf.layout-path",
+      "type": "java.lang.String",
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+    },
+    {
+      "name": "thymeleaf.template-preffix",
+      "type": "java.lang.String",
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+    },
+    {
+      "name": "thymeleaf.template-suffix",
+      "type": "java.lang.String",
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+    }
+  ],
+  "hints": []
+}

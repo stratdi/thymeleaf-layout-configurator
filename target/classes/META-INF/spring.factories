@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.cruzl.thymeleaf.layout.ThymeleafLayoutConfig,\
+org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties

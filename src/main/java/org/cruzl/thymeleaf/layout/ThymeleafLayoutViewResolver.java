@@ -18,7 +18,7 @@ public class ThymeleafLayoutViewResolver extends ThymeleafViewResolver {
     protected View loadView(final String viewName, final Locale locale) throws Exception {
         final ThymeleafLayoutView view = (ThymeleafLayoutView) super.loadView(viewName, locale);
         view.setLayout(this.getLayout());
-        view.setVista(viewName);
+        view.setView(viewName);
         return view;
     }
 }

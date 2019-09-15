@@ -23,17 +23,20 @@ import org.thymeleaf.spring5.naming.SpringContextVariableNames;
 import org.thymeleaf.spring5.view.ThymeleafView;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Setter
 @Getter
 @Slf4j
+@NoArgsConstructor
 public class ThymeleafLayoutView extends ThymeleafView {
 
     public static final String VIEW = "view";
     private static final String PATH_VARIABLES = "PATH_VARIABLES";
     private static final String PATH_VARIABLE_SELECTOR;
+    private static String CONTENT_TYPE_DEFAULT = MediaType.TEXT_HTML_VALUE + ";charset=UTF-8";
 
     static {
         String pathVariablesSelectorValue = null;
@@ -46,8 +49,6 @@ public class ThymeleafLayoutView extends ThymeleafView {
         PATH_VARIABLE_SELECTOR = pathVariablesSelectorValue;
     }
 
-    private static String CONTENT_TYPE_DEFAULT = MediaType.TEXT_HTML_VALUE + ";charset=UTF-8";
-
     protected static void addRequestContextAsVariable(final Map<String, Object> model, final String variableName,
             final RequestContext requestContext) throws ServletException {
         if (model.containsKey(variableName)) {
@@ -59,17 +60,29 @@ public class ThymeleafLayoutView extends ThymeleafView {
 
     private String layout = null;
 
-    private String vista;
-
-    public ThymeleafLayoutView() {
-        super();
-    }
+    private String view;
 
     public ThymeleafLayoutView(final String templateName) {
         super(templateName);
     }
 
-    protected void carregaCapcaleres(final HttpServletResponse response) {
+    @SuppressWarnings("unchecked")
+    public String getProcessedView(final Map<String, ?> model, final HttpServletRequest request,
+            final HttpServletResponse response) throws ServletException {
+        final Map<String, Object> modelMerged = (Map<String, Object>) model;
+        modelMerged.put(VIEW, this.getView());
+        this.setTemplateName(this.getLayout());
+
+        final IWebContext context = this.prepareContext(modelMerged, request, response);
+
+        if (this.getTemplateEngine() == null) {
+            throw new NoSuchElementException("TemplateEngine undefined");
+        }
+
+        return this.getTemplateEngine().process(this.getLayout(), context);
+    }
+
+    protected void loadHeaders(final HttpServletResponse response) {
         final String contentType = this.getContentType() == null ? CONTENT_TYPE_DEFAULT : this.getContentType();
         final String templateCharacterEncoding = this.getCharacterEncoding();
 
@@ -81,33 +94,11 @@ public class ThymeleafLayoutView extends ThymeleafView {
         }
     }
 
-    protected void escriuResponse(final HttpServletRequest request, final HttpServletResponse response,
-            final Map<String, ?> model) throws IOException, ServletException {
-        final String resultat = this.getPlantillaProcessada(model, request, response);
-        response.getWriter().append(resultat);
-    }
-
-    @SuppressWarnings("unchecked")
-    public String getPlantillaProcessada(final Map<String, ?> model, final HttpServletRequest request,
-            final HttpServletResponse response) throws ServletException {
-        final Map<String, Object> modelMerged = (Map<String, Object>) model;
-        modelMerged.put(VIEW, this.getVista());
-        this.setTemplateName(this.getLayout());
-
-        final IWebContext context = this.preparaContext(modelMerged, request, response);
-
-        if (this.getTemplateEngine() == null) {
-            throw new NoSuchElementException("No hi ha un TemplateEngine definit");
-        }
-
-        return this.getTemplateEngine().process(this.getLayout(), context);
-    }
-
-    protected IWebContext preparaContext(final Map<String, ?> model, final HttpServletRequest request,
+    protected IWebContext prepareContext(final Map<String, ?> model, final HttpServletRequest request,
             final HttpServletResponse response) throws ServletException {
 
         final Map<String, Object> mergedModel = new HashMap<>(30);
-        mergedModel.put(VIEW, this.getVista());
+        mergedModel.put(VIEW, this.getView());
 
         if (this.getLocale() == null) {
             throw new IllegalArgumentException("Property 'locale' is required");
@@ -157,9 +148,15 @@ public class ThymeleafLayoutView extends ThymeleafView {
         if (this.getLayout() == null) {
             super.render(model, request, response);
         } else {
-            this.carregaCapcaleres(response);
-            this.escriuResponse(request, response, model);
+            this.loadHeaders(response);
+            this.writeResponse(request, response, model);
         }
+    }
+
+    protected void writeResponse(final HttpServletRequest request, final HttpServletResponse response,
+            final Map<String, ?> model) throws IOException, ServletException {
+        final String processedView = this.getProcessedView(model, request, response);
+        response.getWriter().append(processedView);
     }
 
 }
