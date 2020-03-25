@@ -1,10 +1,6 @@
 Manifest-Version: 1.0
+Build-Jdk-Spec: 11
 Implementation-Title: thymeleaf-layout-configurator
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: cruzl
-Implementation-Vendor-Id: org.cruzl
-Build-Jdk: 1.8.0_211
-Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
- ot-starter-parent/thymeleaf-layout-configurator
 Created-By: Maven Integration for Eclipse
 

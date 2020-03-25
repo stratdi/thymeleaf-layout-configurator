@@ -17,6 +17,6 @@ public class ThymeleafLayoutProperties {
 
     private String layoutPath;
     private String encoding = UTF_8;
-    private String templatePreffix = "classpath:/templates/";
+    private String templatePrefix = "classpath:/templates/";
     private String templateSuffix = ".xhtml";
 }

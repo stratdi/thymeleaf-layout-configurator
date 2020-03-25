@@ -18,7 +18,7 @@
       "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
     },
     {
-      "name": "thymeleaf.template-preffix",
+      "name": "thymeleaf.template-prefix",
       "type": "java.lang.String",
       "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
     },

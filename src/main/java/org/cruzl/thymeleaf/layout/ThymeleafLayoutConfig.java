@@ -43,7 +43,7 @@ public class ThymeleafLayoutConfig {
     @Bean
     public SpringResourceTemplateResolver xhtmlTemplateResolver() {
         final SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setPrefix(this.properties.getTemplatePreffix());
+        templateResolver.setPrefix(this.properties.getTemplatePrefix());
         templateResolver.setSuffix(this.properties.getTemplateSuffix());
         templateResolver.setCharacterEncoding(this.properties.getEncoding());
         templateResolver.setTemplateMode(TemplateMode.HTML);
