@@ -18,6 +18,7 @@ import org.springframework.web.servlet.support.RequestContext;
 import org.springframework.web.servlet.view.AbstractTemplateView;
 import org.thymeleaf.context.IWebContext;
 import org.thymeleaf.context.WebContext;
+import org.thymeleaf.spring5.context.webmvc.SpringWebMvcThymeleafRequestContext;
 import org.thymeleaf.spring5.expression.ThymeleafEvaluationContext;
 import org.thymeleaf.spring5.naming.SpringContextVariableNames;
 import org.thymeleaf.spring5.view.ThymeleafView;
@@ -125,6 +126,8 @@ public class ThymeleafLayoutView extends ThymeleafView {
 
         final RequestContext requestContext = new RequestContext(request, response, this.getServletContext(),
                 mergedModel);
+        SpringWebMvcThymeleafRequestContext thymeleafRequestContext = new SpringWebMvcThymeleafRequestContext(
+                requestContext, request);
 
         addRequestContextAsVariable(mergedModel, SpringContextVariableNames.SPRING_REQUEST_CONTEXT, requestContext);
         addRequestContextAsVariable(mergedModel, AbstractTemplateView.SPRING_MACRO_REQUEST_CONTEXT_ATTRIBUTE,
@@ -137,7 +140,11 @@ public class ThymeleafLayoutView extends ThymeleafView {
 
         mergedModel.put(ThymeleafEvaluationContext.THYMELEAF_EVALUATION_CONTEXT_CONTEXT_VARIABLE_NAME,
                 evaluationContext);
-        return new WebContext(request, response, this.getServletContext(), this.getLocale(), mergedModel);
+
+        WebContext context = new WebContext(request, response, this.getServletContext(), this.getLocale(), mergedModel);
+        context.setVariable("thymeleafRequestContext", thymeleafRequestContext);
+
+        return context;
 
     }
 
