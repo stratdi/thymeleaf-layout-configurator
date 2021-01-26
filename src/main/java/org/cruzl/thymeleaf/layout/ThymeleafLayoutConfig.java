@@ -1,5 +1,6 @@
 package org.cruzl.thymeleaf.layout;
 
+import org.cruzl.thymeleaf.layout.utils.PdfUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +30,6 @@ public class ThymeleafLayoutConfig {
     @Bean
     public ThymeleafViewResolver thymeleafViewResolver(@NonNull final MessageSource messageSource) {
         final ThymeleafLayoutViewResolver thymeleafViewResolver = new ThymeleafLayoutViewResolver();
-
         thymeleafViewResolver.setViewClass(ThymeleafLayoutView.class);
         thymeleafViewResolver.setLayout(this.properties.getLayoutPath());
         thymeleafViewResolver.setTemplateEngine(this.templateEngine);
@@ -48,10 +48,14 @@ public class ThymeleafLayoutConfig {
         templateResolver.setCharacterEncoding(this.properties.getEncoding());
         templateResolver.setTemplateMode(TemplateMode.HTML);
         templateResolver.setCheckExistence(false);
-        templateResolver.setCacheable(false);
         templateResolver.setOrder(1);
 
         return templateResolver;
     }
+    
+	@Bean
+	public PdfUtils pdfUtils() {
+		return new PdfUtils(this.templateEngine);
+	}
 
 }
