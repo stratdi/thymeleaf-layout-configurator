@@ -8,6 +8,16 @@
   ],
   "properties": [
     {
+      "name": "thymeleaf.cache",
+      "type": "java.lang.Boolean",
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+    },
+    {
+      "name": "thymeleaf.cache-t-t-l-m",
+      "type": "java.lang.Long",
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+    },
+    {
       "name": "thymeleaf.encoding",
       "type": "java.lang.String",
       "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"

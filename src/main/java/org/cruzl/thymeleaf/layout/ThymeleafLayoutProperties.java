@@ -13,10 +13,12 @@ import lombok.Setter;
 @ConfigurationProperties("thymeleaf")
 public class ThymeleafLayoutProperties {
 
-    private static final String UTF_8 = "UTF-8";
+	private static final String UTF_8 = "UTF-8";
 
-    private String layoutPath;
-    private String encoding = UTF_8;
-    private String templatePrefix = "classpath:/templates/";
-    private String templateSuffix = ".xhtml";
+	private String layoutPath;
+	private String encoding = UTF_8;
+	private String templatePrefix = "classpath:/templates/";
+	private String templateSuffix = ".xhtml";
+	private boolean cache = true;
+	private long cacheTTLM = 1;
 }
