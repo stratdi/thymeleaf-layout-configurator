@@ -10,17 +10,20 @@
     {
       "name": "thymeleaf.cache",
       "type": "java.lang.Boolean",
-      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties",
+      "defaultValue": true
     },
     {
       "name": "thymeleaf.cache-t-t-l-m",
       "type": "java.lang.Long",
-      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties",
+      "defaultValue": 1
     },
     {
       "name": "thymeleaf.encoding",
       "type": "java.lang.String",
-      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties",
+      "defaultValue": "UTF-8"
     },
     {
       "name": "thymeleaf.layout-path",
@@ -30,12 +33,14 @@
     {
       "name": "thymeleaf.template-prefix",
       "type": "java.lang.String",
-      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties",
+      "defaultValue": "classpath:\/templates\/"
     },
     {
       "name": "thymeleaf.template-suffix",
       "type": "java.lang.String",
-      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties"
+      "sourceType": "org.cruzl.thymeleaf.layout.ThymeleafLayoutProperties",
+      "defaultValue": ".xhtml"
     }
   ],
   "hints": []
